@@ -7,26 +7,41 @@ from tkinter import *
 
 win = tk.Tk()
 win.title("Máy Tính")
-win.iconbitmap("D:/NAM3_HK1/Python Nâng Cao/Ly_Thuyet/Do_An_1_GUI/calculator.ico")
+win.iconbitmap("D:/NAM3_HK1/Python Nâng Cao/Ly_Thuyet/2274802010983_KimDangTungUy_GUI1/calculator.ico")
 ##win.geometry("400x300")
 win.resizable(False,False)
 
 menu_bar = Menu(win)
 win.config(menu=menu_bar)
 
+def reset_window():
+    textbox_a.delete(0, tk.END)
+    textbox_b.delete(0, tk.END)
+    kq_number.configure(state='normal') 
+    kq_number.delete(0, tk.END)
+    kq_number.configure(state='readonly') 
+    scr.delete(1.0, tk.END)  # Xóa lịch sử tính toán
+
+def outwin():
+    answer = msg.askyesno("Đóng cửa sổ", "Bạn có chắc muốn đóng cửa sổ này không?")
+    if answer == True:
+        win.destroy()
+
+def about():
+    answer = msg.showwarning("About", "Chức năng chưa được hoàn thiện!\n \nVui lòng chờ bản cập nhật sau.")
+
 file_menu = Menu(menu_bar, tearoff=0)   
-file_menu.add_command(label="New")                
+file_menu.add_command(label="New", command= reset_window)                
 menu_bar.add_cascade(label="File", menu=file_menu)  
 file_menu.add_separator()
-file_menu.add_command(label="Exit", command=exit)
+file_menu.add_command(label="Exit", command=outwin)
 
-def _msgBox():
-    answer = msg.askyesnocancel("Python Message Multi Choice Box", "Are you sure you really wish to do this?")
-    print (answer)
+
+        
 
 help_menu = Menu(menu_bar, tearoff=0)                             
 menu_bar.add_cascade(label="Help", menu=help_menu)             
-help_menu.add_command(label="About", command= _msgBox)
+help_menu.add_command(label="About", command= about)
 
 tabControl = ttk.Notebook(win)
 #May tinh bassic
