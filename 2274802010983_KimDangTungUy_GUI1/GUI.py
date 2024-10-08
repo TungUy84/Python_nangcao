@@ -34,11 +34,7 @@ file_menu = Menu(menu_bar, tearoff=0)
 file_menu.add_command(label="New", command= reset_window)                
 menu_bar.add_cascade(label="File", menu=file_menu)  
 file_menu.add_separator()
-file_menu.add_command(label="Exit", command=outwin)
-
-
-        
-
+file_menu.add_command(label="Exit", command=outwin)      
 help_menu = Menu(menu_bar, tearoff=0)                             
 menu_bar.add_cascade(label="Help", menu=help_menu)             
 help_menu.add_command(label="About", command= about)
@@ -179,34 +175,6 @@ frame_cd.grid(column=0, row=0, padx=36, pady= 15,)
 input_HEX_lable = ttk.Label(frame_cd, text='HEX = ')
 input_HEX_lable.grid(column=0, row=0, padx=10, pady=10)
 
-PIN = tk.IntVar()
-input_HEX_enter = ttk.Entry(frame_cd, width=40,textvariable=PIN)
-input_HEX_enter.grid(column=1, row=0, padx= 5)
-input_HEX_enter.delete(0, tk.END)
-input_HEX_enter.focus()
-
-def hex_pin():
-    try:
-        binary = ""  # Khởi tạo chuỗi binary
-        value = PIN.get()  # Lấy giá trị từ IntVar 'a'
-
-        while value > 0:
-            binary = str(value % 2) + binary
-            value //=2 
-
-        output_PIN_enter.configure(state='normal')
-        output_PIN_enter.delete(0, tk.END)
-        output_PIN_enter.insert(0,binary)
-        output_PIN_enter.configure(state='readonly')
-    except:
-        output_PIN_enter.configure(state='normal')
-        output_PIN_enter.delete(0, tk.END)
-        output_PIN_enter.insert(0, str("Vui lòng nhập đúng yêu cầu"))
-        output_PIN_enter.configure(state='readonly')
-
-HEX_button = ttk.Button(frame_cd, width=20, text= "Tính", command= hex_pin)
-HEX_button.grid(column=0, row=1, columnspan= 2)
-
 def clear_HEX():
     input_HEX_enter.delete(0, tk.END)
     output_PIN_enter.configure(state='normal') 
@@ -327,7 +295,16 @@ names = ["Light", "Dark", "Green"]
 
 def radCall():
     radSel = radVar.get()
-    if   radSel == 0: tabsetting.configure(bg=colors[0]), tab1.configure(bg=colors[0]), tab2.configure(bg=colors[0]), 
+    if   radSel == 0: 
+        tabsetting.configure(bg=colors[0]), 
+        tab1.configure(bg=colors[0]), 
+        tab2.configure(bg=colors[0]),  
+        cl2.configure(bg=colors[0]),
+        frame_setting_cl.configure(bg=colors[0]), 
+        frame_tt.configure(bg=colors[0]), 
+        frame_cd_H_P.configure(bg=colors[0]), 
+        frame_cd.configure(bg=colors[0]), 
+
     elif radSel == 1:
         tabsetting.configure(bg=colors[1]), 
         tab1.configure(bg=colors[1]), 
